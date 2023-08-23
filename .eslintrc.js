@@ -22,5 +22,13 @@ module.exports = {
   rules: {
     "no-console": "off",
     quotes: ["error", "double"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
   },
 };

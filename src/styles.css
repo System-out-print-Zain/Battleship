@@ -30,3 +30,16 @@ header {
     height: 10%;
     width: 10%;
 }
+
+/* Footer Styling */
+
+#github {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#github-logo {
+    height: 4%;
+    width: 4%;
+}

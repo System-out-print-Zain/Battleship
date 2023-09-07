@@ -36,8 +36,8 @@ header {
 }
 
 .logo-pic {
-    height: 10%;
-    width: 10%;
+    height: 50px;
+    width: 80px;
 }
 
 /* Footer Styling */
@@ -49,8 +49,8 @@ header {
 }
 
 #github-logo {
-    height: 4%;
-    width: 4%;
+    height: 35px;
+    width: 35px;
 }
 
 /* Main styling */

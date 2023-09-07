@@ -10,6 +10,11 @@ body, html {
     height: 100%;
 }
 
+body {
+    display: grid;
+    grid-template-rows: 1fr 15fr 1fr;
+}
+
 /* Header Styling */
 
 header {
@@ -48,7 +53,4 @@ header {
     width: 4%;
 }
 
-body {
-    display: grid;
-    grid-template-rows: 1fr 15fr 1fr;
-}
+/* Main styling */

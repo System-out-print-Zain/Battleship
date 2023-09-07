@@ -6,6 +6,10 @@ html, body {
     font-family: var(--main-font);
 }
 
+body, html {
+    height: 100%;
+}
+
 /* Header Styling */
 
 header {
@@ -42,4 +46,9 @@ header {
 #github-logo {
     height: 4%;
     width: 4%;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 1fr 15fr 1fr;
 }

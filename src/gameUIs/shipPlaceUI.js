@@ -1,13 +1,11 @@
 const content = document.querySelector("main");
 
 export default function displayShipPlaceScreen() {
-  content.innerHTML = 
-  `<div id="grid"></div>
-  <div id="ships"></div>`;
-
   // Generate grid
+  const grid = document.createElement("div");
+  grid.id = "grid";
 
-  const grid = document.getElementById("grid");
+  content.appendChild(grid);
 
   for (let i = 0; i < 10; i++)
   {
@@ -21,6 +19,8 @@ export default function displayShipPlaceScreen() {
   }
 
   // Show ships 
-
+  const ships = document.createElement("div");
+  ships.id = "ships";
+  content.appendChild(ships);
 
 }

@@ -1,7 +1,5 @@
 const content = document.querySelector("main");
 
-function displayStartScreen() {}
-
 function displayShipPlaceScreen() {
   content.innerHTML = 
   `<div id="grid"></div>

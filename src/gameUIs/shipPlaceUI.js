@@ -1,6 +1,6 @@
 const content = document.querySelector("main");
 
-function displayShipPlaceScreen() {
+export default function displayShipPlaceScreen() {
   content.innerHTML = 
   `<div id="grid"></div>
   <div id="ships"></div>`;

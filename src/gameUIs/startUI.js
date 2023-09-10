@@ -1,2 +1,2 @@
 
-function displayStartScreen() {}
+export default function displayStartScreen() {}

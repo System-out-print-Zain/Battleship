@@ -1,2 +1,2 @@
 
-function displayBattleScreen() {}
+export default function displayBattleScreen() {}

@@ -1,2 +1,2 @@
 
-function displayEndScreen() {}
+export default function displayEndScreen() {}

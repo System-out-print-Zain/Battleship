@@ -1,5 +1,10 @@
 const gridSize = 10;
 
+function validateCoords(x, y){
+    if ((x >= 0 && x < gridSize) || (y >= 0 && y < gridSize)) return new Error("Coordinates out of range");
+    return true;
+}
+
 class Grid {
     constructor() {
         // Generate two dim array
@@ -20,8 +25,8 @@ class Grid {
     }
 
     checkSquareEmpty(x, y){
-        if ((x >= 0 && x <= 9) || (y >= 0 && y <= 9)) return new Error("Coordinates out of range");
-
+        
+        validateCoords();
         return this.grid[y][x][0] === null
         
     }

@@ -25,9 +25,14 @@ class Grid {
     }
 
     checkSquareEmpty(x, y){
-        
+
         validateCoords();
         return this.grid[y][x][0] === null
         
+    }
+
+    checkSquareAttacked(x, y){
+        validateCoords();
+        return this.grid[y][x][1] === "A";
     }
 }

@@ -28,10 +28,8 @@ export default class Grid {
     }
 
     checkSquareEmpty(x, y){
-
         validateCoords();
-        return this.grid[y][x][0] === null
-        
+        return this.grid[y][x][0] === null;
     }
 
     checkSquareAttacked(x, y){

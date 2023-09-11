@@ -1,7 +1,7 @@
-const gridSize = 10;
+const GRIDSIZE = 10;
 
 function validateCoords(x, y){
-    if ((x >= 0 && x < gridSize) || (y >= 0 && y < gridSize))
+    if ((x >= 0 && x < GRIDSIZE) || (y >= 0 && y < GRIDSIZE))
     {
         return new Error("Coordinates out of range");
     } 
@@ -14,14 +14,13 @@ export default class Grid {
 
         this.cells = []
 
-        for (let i = 0; i < gridSize; i ++)
+        for (let i = 0; i < GRIDSIZE; i ++)
         {
             this.cells.push([]);
-            for (let j = 0; j < gridSize; j ++)
+            for (let j = 0; j < GRIDSIZE; j ++)
             {
                 // null indicates that the square is empty
-                // "NA" means 'not attacked'; "A" means 'attacked'
-                this.cells[i].push([null, "NA"]);
+                this.cells[i].push([null, "NOTATTACKED"]);
             }
         }
 
@@ -34,12 +33,12 @@ export default class Grid {
 
     checkSquareAttacked(x, y){
         validateCoords(x, y);
-        return this.cells[y][x][1] === "A";
+        return this.cells[y][x][1] === "ATTACKED";
     }
 
     markAttack(x, y){
         validateCoords(x, y)
-        this.cells[y][x][1] = "A";
+        this.cells[y][x][1] = "ATTACKED";
 
         const ship = this.cells[y][x][0]
 

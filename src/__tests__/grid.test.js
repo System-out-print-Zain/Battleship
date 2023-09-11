@@ -21,7 +21,7 @@ describe("Test Instantiation", () => {
                 if (testGrid.cells[i][j][0] !== null){
                     allEmpty = false;
                 }
-                if (testGrid.cells[i][j][1] !== "NA"){
+                if (testGrid.cells[i][j][1] !== "NOTATTACKED"){
                     allUnAttacked = false;
                 }
             }
@@ -52,7 +52,7 @@ describe("Test checkSquareAttacked method", () => {
     
         expect(testGrid.checkSquareAttacked(0, 0) === false).toBeTruthy();
     
-        testGrid.cells[0][0][1] = "A";
+        testGrid.cells[0][0][1] = "ATTACKED";
     
         expect(testGrid.checkSquareAttacked(0, 0) === false).toBeFalsy();
     })
@@ -64,17 +64,17 @@ describe("Test markAttacked method", () => {
 
         testGrid.markAttack(0, 0)
 
-        expect(testGrid.cells[0][0][1]).toBe("A");
+        expect(testGrid.cells[0][0][1]).toBe("ATTACKED");
     })
 
     test("An attacked square remains attacked", () => {
         const testGrid = new Grid();
 
-        testGrid.cells[0][0][1] = "A";
+        testGrid.cells[0][0][1] = "ATTACKED";
 
         testGrid.markAttack(0, 0)
 
-        expect(testGrid.cells[0][0][1]).toBe("A");
+        expect(testGrid.cells[0][0][1]).toBe("ATTACKED");
     })
 
     test("If a ship is occupying the unattacked square, it should call its hit method once", () => {

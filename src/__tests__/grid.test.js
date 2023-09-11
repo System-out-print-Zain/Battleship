@@ -62,7 +62,7 @@ describe("Test markAttacked method", () => {
     test("An unattacked square is marked attacked", () => {
         const testGrid = new Grid();
 
-        testGrid.markAttacked(0, 0)
+        testGrid.markAttack(0, 0)
 
         expect(testGrid.cells[0][0][1]).toBe("A");
     })
@@ -72,7 +72,7 @@ describe("Test markAttacked method", () => {
 
         testGrid.cells[0][0][1] = "A";
 
-        testGrid.markAttacked(0, 0)
+        testGrid.markAttack(0, 0)
 
         expect(testGrid.cells[0][0][1]).toBe("A");
     })
@@ -86,7 +86,7 @@ describe("Test markAttacked method", () => {
 
         testGrid.cells[0][0][0] = ship;
 
-        testGrid.markAttacked(0, 0)
+        testGrid.markAttack(0, 0)
 
         expect(ship.hit.mock.calls).toHaveLength(1);
     })

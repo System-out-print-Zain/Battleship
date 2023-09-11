@@ -37,7 +37,7 @@ export default class Grid {
         return this.cells[y][x][1] === "A";
     }
 
-    markAttacked(x, y){
+    markAttack(x, y){
         validateCoords(x, y)
         this.cells[y][x][1] = "A";
 

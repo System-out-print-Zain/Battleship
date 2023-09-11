@@ -76,4 +76,18 @@ describe("Test markAttacked method", () => {
 
         expect(testGrid.cells[0][0][1]).toBe("A");
     })
+
+    test("If a ship is occupying the unattacked square, it should call its hit method once", () => {
+        const testGrid = new Grid();
+
+        const ship = {
+            hit: jest.fn(),
+        }
+
+        testGrid.cells[0][0][0] = ship;
+
+        testGrid.markAttacked(0, 0)
+
+        expect(ship.hit.mock.calls).toHaveLength(1);
+    })
 })

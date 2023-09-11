@@ -57,3 +57,23 @@ describe("Test checkSquareAttacked method", () => {
         expect(testGrid.checkSquareAttacked(0, 0) === false).toBeFalsy();
     })
 })
+
+describe("Test markAttacked method", () => {
+    test("An unattacked square is marked attacked", () => {
+        const testGrid = new Grid();
+
+        testGrid.markAttacked(0, 0)
+
+        expect(testGrid.cells[0][0][1]).toBe("A");
+    })
+
+    test("An attacked square remains attacked", () => {
+        const testGrid = new Grid();
+
+        testGrid.cells[0][0][1] = "A";
+
+        testGrid.markAttacked(0, 0)
+
+        expect(testGrid.cells[0][0][1]).toBe("A");
+    })
+})

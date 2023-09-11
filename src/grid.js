@@ -26,21 +26,21 @@ export default class Grid {
 
     }
 
-    checkSquareEmpty(squareX, squareY){
-        validateCoords(squareX, squareY);
-        return this.cells[squareY][squareX][0] === null;
+    checkSquareEmpty(cellX, cellY){
+        validateCoords(cellX, cellY);
+        return this.cells[cellY][cellX][0] === null;
     }
 
-    checkSquareAttacked(squareX, squareY){
-        validateCoords(squareX, squareY);
-        return this.cells[squareY][squareX][1] === "ATTACKED";
+    checkSquareAttacked(cellX, cellY){
+        validateCoords(cellX, cellY);
+        return this.cells[cellY][cellX][1] === "ATTACKED";
     }
 
-    markAttack(squareX, squareY){
-        validateCoords(squareX, squareY)
-        this.cells[squareY][squareX][1] = "ATTACKED";
+    markAttack(cellX, cellY){
+        validateCoords(cellX, cellY)
+        this.cells[cellY][cellX][1] = "ATTACKED";
 
-        const ship = this.cells[squareY][squareX][0]
+        const ship = this.cells[cellY][cellX][0]
 
         if (ship !== null)
         {

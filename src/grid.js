@@ -28,12 +28,17 @@ export default class Grid {
     }
 
     checkSquareEmpty(x, y){
-        validateCoords();
+        validateCoords(x, y);
         return this.cells[y][x][0] === null;
     }
 
     checkSquareAttacked(x, y){
-        validateCoords();
+        validateCoords(x, y);
         return this.cells[y][x][1] === "A";
+    }
+
+    markAttacked(x, y){
+        validateCoords(x, y)
+        this.cells[y][x][1] = "A";
     }
 }

@@ -40,5 +40,12 @@ export default class Grid {
     markAttacked(x, y){
         validateCoords(x, y)
         this.cells[y][x][1] = "A";
+
+        const ship = this.cells[y][x][0]
+
+        if (ship !== null)
+        {
+            ship.hit();
+        }
     }
 }

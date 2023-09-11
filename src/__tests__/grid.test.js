@@ -3,7 +3,7 @@ import Grid from "../grid";
 test("10 x 10 2d array is generated internally.", () => {
     const testGrid = new Grid();
 
-    expect(testGrid.cells.length === 10 && testGrid.cells[0].length === 10).toBe(true);
+    expect(testGrid.cells.length === 10 && testGrid.cells[0].length === 10).toBeTruthy();
 })
 
 test("Each cell is initially empty and unattacked.", () => {
@@ -26,6 +26,7 @@ test("Each cell is initially empty and unattacked.", () => {
         }
     }
 
-    expect(allEmpty).toBe(true);
-    expect(allUnAttacked).toBe(true);
+    expect(allEmpty).toBeTruthy();
+    expect(allUnAttacked).toBeTruthy();
 })
+

@@ -30,3 +30,24 @@ test("Each cell is initially empty and unattacked.", () => {
     expect(allUnAttacked).toBeTruthy();
 })
 
+test("Properly checks if a cell is empty or not.", () => {
+    const testGrid = new Grid();
+
+    expect(testGrid.checkSquareEmpty(0, 0) === true).toBeTruthy();
+
+    const mockShip = {}
+
+    testGrid.cells[0][0][0] = mockShip;
+
+    expect(testGrid.checkSquareEmpty(0, 0) === true).toBeFalsy();
+})
+
+test("Properly checks if a cell has been attacked or not.", () => {
+    const testGrid = new Grid();
+
+    expect(testGrid.checkSquareAttacked(0, 0) === false).toBeTruthy();
+
+    testGrid.cells[0][0][1] = "A";
+
+    expect(testGrid.checkSquareAttacked(0, 0) === false).toBeFalsy();
+})

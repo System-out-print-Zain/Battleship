@@ -76,3 +76,22 @@ export default class Grid {
         if (direction === "VERT"){this.placeShipVert(ship, startCellX, startCellY)}
         if (direction === "HOR"){this.placeShipHoriz(ship, startCellX, startCellY)}
     }
+
+    getEmptyCellsWithinRow(row){
+        const emptyCells = []
+        for (let i = 0; i < GRIDSIZE; i++){
+            if (this.cellEmpty(i, row)){
+                emptyCells.push([i, row]);
+            }
+        }
+        return emptyCells;
+    }
+
+    getEmptyCells(){
+        let emptyCells = []
+        for (let i = 0; i < GRIDSIZE; i++){
+            emptyCells = emptyCells.concat(this.getEmptyCellsWithinRow(i));
+        }
+        return emptyCells;
+    }
+}

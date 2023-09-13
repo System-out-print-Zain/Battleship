@@ -91,3 +91,16 @@ describe("Test markAttacked method", () => {
         expect(ship.hit.mock.calls).toHaveLength(1);
     })
 })
+
+describe("Test placeShip method", () => {
+    const ship = {}
+
+    test("If there is room, the ship must be placed", () => {
+        ship.length = 3;
+        const testGrid = new Grid();
+        testGrid.placeShip(ship, 1, 3, "HOR");
+        expect(testGrid.cells[3][1][0]).toBe(ship);
+        expect(testGrid.cells[3][2][0]).toBe(ship);
+        expect(testGrid.cells[3][3][0]).toBe(ship);
+    })
+})

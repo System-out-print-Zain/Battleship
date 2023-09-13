@@ -47,4 +47,33 @@ export default class Grid {
             ship.hit();
         }
     }
+
+    placeShipVert(ship, startCellX, startCellY){
+        const len = ship.length;
+        for (let i = 0; i < len; i++){
+            if (this.checkSquareEmpty(startCellX, startCellY + i)){
+                this.cells[startCellY + i][startCellX][0] = ship
+            }
+            else{
+                throw new Error("There is not enough space");
+            }
+        }
+    }
+
+    placeShipHoriz(ship, startCellX, startCellY){
+        const len = ship.length;
+        for (let i = 0; i < len; i++){
+            if (this.checkSquareEmpty(startCellX + i, startCellY)){
+                this.cells[startCellY][startCellX + i][0] = ship
+            }
+            else{
+                throw new Error("There is not enough space");
+            }
+        }
+    }
+
+    placeShip(ship, startCellX, startCellY, direction){
+        if (direction === "VERT"){this.placeShipVert(ship, startCellX, startCellY)}
+        if (direction === "HOR"){this.placeShipHoriz(ship, startCellX, startCellY)}
+    }
 }

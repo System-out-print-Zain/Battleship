@@ -32,29 +32,29 @@ describe("Test Instantiation", () => {
     })
 })
 
-describe("Test squareEmpty method", () => {
+describe("Test cellEmpty method", () => {
     test("Properly checks if a cell is empty or not.", () => {
         const testGrid = new Grid();
     
-        expect(testGrid.squareEmpty(0, 0) === true).toBeTruthy();
+        expect(testGrid.cellEmpty(0, 0) === true).toBeTruthy();
     
         const mockShip = {}
     
         testGrid.cells[0][0][0] = mockShip;
     
-        expect(testGrid.squareEmpty(0, 0) === true).toBeFalsy();
+        expect(testGrid.cellEmpty(0, 0) === true).toBeFalsy();
     })
 })
 
-describe("Test squareAttacked method", () => {
+describe("Test cellAttacked method", () => {
     test("Properly checks if a cell has been attacked or not.", () => {
         const testGrid = new Grid();
     
-        expect(testGrid.squareAttacked(0, 0) === false).toBeTruthy();
+        expect(testGrid.cellAttacked(0, 0) === false).toBeTruthy();
     
         testGrid.cells[0][0][1] = "ATTACKED";
     
-        expect(testGrid.squareAttacked(0, 0) === false).toBeFalsy();
+        expect(testGrid.cellAttacked(0, 0) === false).toBeFalsy();
     })
 })
 

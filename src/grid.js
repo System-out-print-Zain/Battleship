@@ -26,12 +26,12 @@ export default class Grid {
 
     }
 
-    squareEmpty(cellX, cellY){
+    cellEmpty(cellX, cellY){
         validateCoords(cellX, cellY);
         return this.cells[cellY][cellX][0] === null;
     }
 
-    squareAttacked(cellX, cellY){
+    cellAttacked(cellX, cellY){
         validateCoords(cellX, cellY);
         return this.cells[cellY][cellX][1] === "ATTACKED";
     }
@@ -51,7 +51,7 @@ export default class Grid {
     placeShipVert(ship, startCellX, startCellY){
         const len = ship.length;
         for (let i = 0; i < len; i++){
-            if (this.squareEmpty(startCellX, startCellY + i)){
+            if (this.cellEmpty(startCellX, startCellY + i)){
                 this.cells[startCellY + i][startCellX][0] = ship
             }
             else{
@@ -63,7 +63,7 @@ export default class Grid {
     placeShipHoriz(ship, startCellX, startCellY){
         const len = ship.length;
         for (let i = 0; i < len; i++){
-            if (this.squareEmpty(startCellX + i, startCellY)){
+            if (this.cellEmpty(startCellX + i, startCellY)){
                 this.cells[startCellY][startCellX + i][0] = ship
             }
             else{
@@ -76,4 +76,3 @@ export default class Grid {
         if (direction === "VERT"){this.placeShipVert(ship, startCellX, startCellY)}
         if (direction === "HOR"){this.placeShipHoriz(ship, startCellX, startCellY)}
     }
-}

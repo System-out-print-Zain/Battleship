@@ -98,11 +98,18 @@ describe("Test placeShip method", () => {
     test("If there is room, the ship must be placed", () => {
         ship.length = 3;
         const testGrid = new Grid();
+
         testGrid.placeShip(ship, 1, 3, "HOR");
         expect(testGrid.cells[3][1][0]).toBe(ship);
         expect(testGrid.cells[3][2][0]).toBe(ship);
         expect(testGrid.cells[3][3][0]).toBe(ship);
         expect(testGrid.cells[3][4][0]).toBe(null);
+
+        ship.length = 2
+        testGrid.placeShip(ship, 0, 0, "VERT");
+        expect(testGrid.cells[0][0][0]).toBe(ship);
+        expect(testGrid.cells[1][0][0]).toBe(ship);
+        expect(testGrid.cells[2][0][0]).toBe(null);
     })
 
     test("If there is no room, throw error", () => {

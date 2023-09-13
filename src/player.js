@@ -18,3 +18,23 @@ export default class Player {
         return destroyed;
     }
 }
+
+export class HumanPlayer extends Player {
+    constructor(){
+        super().constructor();
+    }
+
+    attack(grid){
+        // TODO: Command displayController to get input from user.
+    }
+}
+
+export class CPUPlayer extends Player {
+    constructor(){
+        super().constructor();
+    }
+
+    attack(grid){
+        // TODO: Run algorithm to choose cell to attack
+    }
+}

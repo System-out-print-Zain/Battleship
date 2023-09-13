@@ -106,6 +106,11 @@ describe("Test placeShip method", () => {
     })
 
     test("If there is no room, throw error", () => {
-        
+        ship.length = 5;
+        const secShip = {};
+        const testGrid = new Grid();
+        testGrid.cells[5][5][0] = secShip
+
+        expect(() => {testGrid.placeShip(ship, 5, 1, "VERT")}).toThrow("There is not enough space");
     })
 })

@@ -121,3 +121,37 @@ describe("Test placeShip method", () => {
         expect(() => {testGrid.placeShip(ship, 5, 1, "VERT")}).toThrow("There is not enough space");
     })
 })
+
+describe("Test getEmptyCells", () => {
+    test("If all squares are empty, it should return all cells", () => {
+        const result = []
+        for (let i = 0; i < 10; i++){
+            for (let j = 0; j < 10; j++){
+                result.push([j, i])
+            }
+        }
+
+        const testGrid = new Grid();
+
+        expect(testGrid.getEmptyCells()).toEqual(result);
+    })
+    test("If a square is occupied, it should be excluded from the return value", () => {
+        const result = []
+        for (let i = 0; i < 10; i++){
+            for (let j = 0; j < 10; j++){
+                result.push([j, i])
+            }
+        }
+        result.pop();
+        result.pop();
+
+        const ship = {length: 2};
+
+        const testGrid = new Grid();
+
+        testGrid.cells[9][8] = ship;
+        testGrid.cells[9][9] = ship;
+
+        expect(testGrid.getEmptyCells()).toEqual(result);
+    });
+})

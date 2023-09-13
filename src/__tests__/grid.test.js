@@ -102,5 +102,10 @@ describe("Test placeShip method", () => {
         expect(testGrid.cells[3][1][0]).toBe(ship);
         expect(testGrid.cells[3][2][0]).toBe(ship);
         expect(testGrid.cells[3][3][0]).toBe(ship);
+        expect(testGrid.cells[3][4][0]).toBe(null);
+    })
+
+    test("If there is no room, throw error", () => {
+        
     })
 })

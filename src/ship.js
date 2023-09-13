@@ -6,7 +6,9 @@ export default class Ship {
     }
 
     hit(){
-        this.health -= 1;
+        if (this.health > 0){
+            this.health -= 1;
+        }
     }
 
     destroyed(){

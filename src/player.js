@@ -7,4 +7,14 @@ export default class Player {
             this.fleet.push(new Ship(i));
         }
     }
+
+    fleetDestroyed(){
+        let destroyed = true
+        this.fleet.forEach((ship) => {
+            if (!ship.destroyed()){
+                destroyed = false
+            }
+        })
+        return destroyed;
+    }
 }

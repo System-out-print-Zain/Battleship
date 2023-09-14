@@ -17,6 +17,23 @@ const gameController = {
         this.player1.placeFleet();
         this.player2.placeFleet();
     },
+
+    endGame(winner){
+        // TODO: Command displayController to show the end screen with the result
+        return winner;
+    },
+
+    playGame(){
+        let turn = this.player1;
+        let gridToAttack = this.grid1;
+        while (!turn.fleetDestroyed()){
+            turn.attack(gridToAttack);
+            turn = turn === this.player1 ? this.player2 : this.player1;
+            gridToAttack = gridToAttack === this.grid1 ? this.grid2 : this.grid1; 
+        }
+
+        this.endGame(turn);
+    },
 }
 
 export default gameController;

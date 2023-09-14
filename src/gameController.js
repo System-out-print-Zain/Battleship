@@ -18,11 +18,6 @@ const gameController = {
         this.player2.placeFleet(this.grid2);
     },
 
-    endGame(winner){
-        // TODO: Command displayController to show the end screen with the result
-        return winner;
-    },
-
     playGame(){
         let attackingPlayer = this.player1;
         let gridToAttack = this.grid1;
@@ -36,7 +31,7 @@ const gameController = {
             gridToAttack = gridToAttack === this.grid1 ? this.grid2 : this.grid1; 
         }
 
-        this.endGame(attackingPlayer);
+        // TODO: Command displayController to show the end screen with the result
     },
 }
 

@@ -48,7 +48,7 @@ export default class Grid {
         }
     }
 
-    placeShipVert(ship, startCellX, startCellY){
+    #placeShipVert(ship, startCellX, startCellY){
         const len = ship.length;
         for (let i = 0; i < len; i++){
             if (this.cellEmpty(startCellX, startCellY + i)){
@@ -60,7 +60,7 @@ export default class Grid {
         }
     }
 
-    placeShipHoriz(ship, startCellX, startCellY){
+    #placeShipHoriz(ship, startCellX, startCellY){
         const len = ship.length;
         for (let i = 0; i < len; i++){
             if (this.cellEmpty(startCellX + i, startCellY)){
@@ -73,11 +73,11 @@ export default class Grid {
     }
 
     placeShip(ship, startCellX, startCellY, direction){
-        if (direction === "VERT"){this.placeShipVert(ship, startCellX, startCellY)}
-        if (direction === "HOR"){this.placeShipHoriz(ship, startCellX, startCellY)}
+        if (direction === "VERT"){this.#placeShipVert(ship, startCellX, startCellY)}
+        if (direction === "HOR"){this.#placeShipHoriz(ship, startCellX, startCellY)}
     }
 
-    getEmptyCellsWithinRow(row){
+    #getEmptyCellsWithinRow(row){
         const emptyCells = []
         for (let i = 0; i < GRIDSIZE; i++){
             if (this.cellEmpty(i, row)){
@@ -90,7 +90,7 @@ export default class Grid {
     getEmptyCells(){
         let emptyCells = []
         for (let i = 0; i < GRIDSIZE; i++){
-            emptyCells = emptyCells.concat(this.getEmptyCellsWithinRow(i));
+            emptyCells = emptyCells.concat(this.#getEmptyCellsWithinRow(i));
         }
         return emptyCells;
     }

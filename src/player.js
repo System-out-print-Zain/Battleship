@@ -1,7 +1,8 @@
 import Ship from "./ship";
 
 export default class Player {
-    constructor(){
+    constructor(name){
+        this.name = name;
         this.fleet = [];
         for (let i = 1; i <= 5; i ++){
             this.fleet.push(new Ship(i));
@@ -20,8 +21,8 @@ export default class Player {
 }
 
 export class HumanPlayer extends Player {
-    constructor(){
-        super().constructor();
+    constructor(name){
+        super().constructor(name);
     }
 
     static attack(grid){
@@ -30,8 +31,8 @@ export class HumanPlayer extends Player {
 }
 
 export class CPUPlayer extends Player {
-    constructor(){
-        super().constructor();
+    constructor(name){
+        super().constructor(name);
     }
 
     static attack(grid){

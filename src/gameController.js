@@ -24,15 +24,15 @@ const gameController = {
     },
 
     playGame(){
-        let turn = this.player1;
+        let playerToAttack = this.player1;
         let gridToAttack = this.grid1;
-        while (!turn.fleetDestroyed()){
-            turn.attack(gridToAttack);
-            turn = turn === this.player1 ? this.player2 : this.player1;
+        while (!playerToAttack.fleetDestroyed()){
+            playerToAttack.attack(gridToAttack);
+            playerToAttack = playerToAttack === this.player1 ? this.player2 : this.player1;
             gridToAttack = gridToAttack === this.grid1 ? this.grid2 : this.grid1; 
         }
 
-        this.endGame(turn);
+        this.endGame(playerToAttack);
     },
 }
 

@@ -18,6 +18,10 @@ export default class Player {
         })
         return destroyed;
     }
+
+    static attack(grid, cellX, cellY){
+        grid.markAttack(cellX, cellY);
+    }
 }
 
 export class HumanPlayer extends Player {
@@ -25,7 +29,7 @@ export class HumanPlayer extends Player {
         super().constructor(name);
     }
 
-    static attack(grid){
+    static chooseAttack(grid){
         // TODO: Command displayController to get input from user.
     }
 }
@@ -35,7 +39,7 @@ export class CPUPlayer extends Player {
         super().constructor(name);
     }
 
-    static attack(grid){
+    static chooseAttack(grid){
         const choices = grid.getEmptyCells();
         const randIndex = Math.floor(choices.length * Math.random())
 

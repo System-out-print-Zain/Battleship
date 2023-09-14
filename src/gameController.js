@@ -14,8 +14,8 @@ const gameController = {
         this.grid1 = new Grid();
         this.grid2 = new Grid();
 
-        this.player1.placeFleet();
-        this.player2.placeFleet();
+        this.player1.placeFleet(this.grid1);
+        this.player2.placeFleet(this.grid2);
     },
 
     endGame(winner){
@@ -26,8 +26,12 @@ const gameController = {
     playGame(){
         let playerToAttack = this.player1;
         let gridToAttack = this.grid1;
+        let attack;
         while (!playerToAttack.fleetDestroyed()){
-            playerToAttack.attack(gridToAttack);
+            attack = playerToAttack.chooseAttack(gridToAttack);
+            // TODO: Command displayController to show the attack
+            playerToAttack.attack(gridToAttack, attack[0], attack[1]);
+            
             playerToAttack = playerToAttack === this.player1 ? this.player2 : this.player1;
             gridToAttack = gridToAttack === this.grid1 ? this.grid2 : this.grid1; 
         }

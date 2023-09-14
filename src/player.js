@@ -20,7 +20,12 @@ export default class Player {
     }
 
     static attack(grid, cellX, cellY){
-        grid.markAttack(cellX, cellY);
+        if (!grid.cellAttacked()){
+            grid.markAttack(cellX, cellY);
+        }
+        else{
+            throw Error("This square has already been attacked");
+        }
     }
 }
 

@@ -24,7 +24,7 @@ export class HumanPlayer extends Player {
         super().constructor();
     }
 
-    attack(grid){
+    static attack(grid){
         // TODO: Command displayController to get input from user.
     }
 }
@@ -34,7 +34,10 @@ export class CPUPlayer extends Player {
         super().constructor();
     }
 
-    attack(grid){
-        // TODO: Run algorithm to choose cell to attack
+    static attack(grid){
+        const choices = grid.getEmptyCells();
+        const randIndex = Math.floor(choices.length * Math.random())
+
+        return choices[randIndex];
     }
 }

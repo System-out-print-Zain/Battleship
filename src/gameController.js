@@ -24,19 +24,19 @@ const gameController = {
     },
 
     playGame(){
-        let playerToAttack = this.player1;
+        let attackingPlayer = this.player1;
         let gridToAttack = this.grid1;
         let attack;
-        while (!playerToAttack.fleetDestroyed()){
-            attack = playerToAttack.chooseAttack(gridToAttack);
+        while (!attackingPlayer.fleetDestroyed()){
+            attack = attackingPlayer.chooseAttack(gridToAttack);
             // TODO: Command displayController to show the attack
-            playerToAttack.attack(gridToAttack, attack[0], attack[1]);
-            
-            playerToAttack = playerToAttack === this.player1 ? this.player2 : this.player1;
+            attackingPlayer.attack(gridToAttack, attack[0], attack[1]);
+
+            attackingPlayer = attackingPlayer === this.player1 ? this.player2 : this.player1;
             gridToAttack = gridToAttack === this.grid1 ? this.grid2 : this.grid1; 
         }
 
-        this.endGame(playerToAttack);
+        this.endGame(attackingPlayer);
     },
 }
 

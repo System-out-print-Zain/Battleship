@@ -4,11 +4,11 @@ import Grid from "./grid";
 export default class Player {
     static #genFleet(){
         return {
-            "Carrier": new Ship(5),
-            "Battleship": new Ship(4),
-            "Cruiser": new Ship(3),
-            "Submarine": new Ship(3),
-            "Destroyer": new Ship(2),
+            "Carrier": new Ship("Carrier", 5),
+            "Battleship": new Ship("Battleship", 4),
+            "Cruiser": new Ship("Cruiser", 3),
+            "Submarine": new Ship("Submarine", 3),
+            "Destroyer": new Ship("Destroyer", 2),
         }
     }
 

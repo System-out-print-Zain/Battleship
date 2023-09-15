@@ -20,16 +20,17 @@ export default class Player {
 
     fleetDestroyed(){
         let destroyed = true
-        this.fleet.forEach((ship) => {
+        const ships = Object.values(this.fleet);
+        ships.forEach((ship) => {
             if (!ship.destroyed()){
-                destroyed = false
+                destroyed = false;
             }
         })
         return destroyed;
     }
 
-    placeShip(shipName, cellX, cellY){
-        this.grid[cellY][cellX] = this.fleet[shipName];
+    placeShip(shipName, startCellX, startCellY){
+        this.grid.placeShip(this.fleet[shipName], startCellX, startCellY);
     }
 
     static attack(grid, cellX, cellY){

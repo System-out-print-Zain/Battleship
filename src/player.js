@@ -1,12 +1,21 @@
 import Ship from "./ship";
+import Grid from "./grid";
 
 export default class Player {
+    static #genFleet(){
+        return {
+            "Carrier": new Ship(5),
+            "Battleship": new Ship(4),
+            "Cruiser": new Ship(3),
+            "Submarine": new Ship(3),
+            "Destroyer": new Ship(2),
+        }
+    }
+
     constructor(name){
         this.name = name;
-        this.fleet = [];
-        for (let i = 1; i <= 5; i ++){
-            this.fleet.push(new Ship(i));
-        }
+        this.grid = new Grid();
+        this.fleet = Player.#genFleet();
     }
 
     fleetDestroyed(){
@@ -17,6 +26,10 @@ export default class Player {
             }
         })
         return destroyed;
+    }
+
+    placeShip(shipName, cellX, cellY){
+        this.grid[cellY][cellX] = this.fleet[shipName];
     }
 
     static attack(grid, cellX, cellY){
@@ -37,6 +50,10 @@ export class HumanPlayer extends Player {
     static chooseAttack(grid){
         // TODO: Command displayController to get input from user.
     }
+
+    placeFleet(){
+
+    }
 }
 
 export class CPUPlayer extends Player {
@@ -49,5 +66,9 @@ export class CPUPlayer extends Player {
         const randIndex = Math.floor(choices.length * Math.random())
 
         return choices[randIndex];
+    }
+
+    placeFleet(){
+
     }
 }

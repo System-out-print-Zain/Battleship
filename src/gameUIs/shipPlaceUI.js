@@ -30,3 +30,12 @@ function displayShipPlaceScreen() {
   content.appendChild(ships);
 
 }
+
+function initShipPlaceScreen(player){
+
+}
+
+export default function loadShipPlaceScreen(){
+  displayShipPlaceScreen();
+  initShipPlaceScreen();
+}

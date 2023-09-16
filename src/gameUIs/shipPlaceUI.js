@@ -1,11 +1,6 @@
-const content = document.querySelector("main");
-
-export default function displayShipPlaceScreen() {
-  // Generate grid
+function genGrid() {
   const grid = document.createElement("div");
   grid.id = "grid";
-
-  content.appendChild(grid);
 
   for (let i = 0; i < 10; i++)
   {
@@ -18,9 +13,20 @@ export default function displayShipPlaceScreen() {
     }
   }
 
-  // Show ships 
+  return grid;
+}
+
+function genShips(){
   const ships = document.createElement("div");
   ships.id = "ships";
+}
+
+function displayShipPlaceScreen() {
+  const content = document.querySelector("main");
+  const grid = genGrid();
+  content.appendChild(grid);
+
+  const ships = genShips();
   content.appendChild(ships);
 
 }

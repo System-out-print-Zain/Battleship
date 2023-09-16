@@ -30,7 +30,11 @@ export default class Player {
     }
 
     placeShip(shipName, startCellX, startCellY){
-        this.grid.placeShip(this.fleet[shipName], startCellX, startCellY);
+        if (this.grid.shipPlaced(this.fleet[shipName])){
+            this.grid.placeShip(this.fleet[shipName], startCellX, startCellY);
+        }else{
+            throw Error(`The ${shipName} has already been placed`);
+        }
     }
 
     static attack(grid, cellX, cellY){

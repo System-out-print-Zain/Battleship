@@ -95,7 +95,7 @@ export default class Grid {
         return emptyCells;
     }
 
-    checkShipPlaced(ship){
+    shipPlaced(ship){
         for (let i = 0; i < GRIDSIZE; i++){
             for (let j = 0; j < GRIDSIZE; j++){
                 if (this.cells[i][j] === ship){

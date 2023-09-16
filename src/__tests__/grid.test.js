@@ -155,3 +155,16 @@ describe("Test getEmptyCells", () => {
         expect(testGrid.getEmptyCells()).toEqual(result);
     });
 })
+
+describe("Test shipPlaced", () => {
+    const ship = {};
+    test("Return false if the ship has not been placed", () => {
+        const testGrid = new Grid();
+        expect(testGrid.shipPlaced(ship)).toBeFalsy();
+    })
+    test("Return true if the ship has been placed", () => {
+        const testGrid = new Grid();
+        testGrid.cells[0][0] = ship;
+        expect(testGrid.shipPlaced(ship)).toBeTruthy();
+    })
+})

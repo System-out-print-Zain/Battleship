@@ -59,6 +59,7 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 20px;
 }
 
 /* Grid */
@@ -76,16 +77,18 @@ main {
 
 #ships {
     display: flex;
-    flex-direction: column;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .ship {
     display: flex;
+    border: 1px solid black;
 }
 
 .ship-block{
-    width: 10px;
-    height: 10px;
+    width: 30px;
+    height: 30px;
     border: 1px solid black;
+    background-color: lightgreen;
 }

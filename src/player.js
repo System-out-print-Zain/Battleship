@@ -18,6 +18,10 @@ export default class Player {
         this.fleet = Player.#genFleet();
     }
 
+    getShips(){
+        return [this.fleet.Carrier, this.fleet.Battleship, this.fleet.Cruiser, this.fleet.Submarine, this.fleet.Destroyer];
+    }
+
     fleetDestroyed(){
         let destroyed = true
         const ships = Object.values(this.fleet);

@@ -29,11 +29,16 @@ function genShip(shipLength){
   return ship;
 }
 
-function genShips(){
-  const ships = document.createElement("div");
-  ships.id = "ships";
+function genShips(player){
+  const DOMShips = document.createElement("div");
+  DOMShips.id = "ships";
 
-  return ships;
+  const playerShips = player.getShips();
+  playerShips.forEach(ship => {
+    DOMShips.appendChild(genShip(ship.length));
+  });
+
+  return DOMShips;
 }
 
 export function displayShipPlaceScreen() {

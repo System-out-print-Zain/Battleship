@@ -73,3 +73,19 @@ main {
 .square {
     border: 1px black solid;
 }
+
+#ships {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ship {
+    display: flex;
+}
+
+.ship-block{
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+}

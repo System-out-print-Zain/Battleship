@@ -75,6 +75,8 @@ main {
     border: 1px black solid;
 }
 
+/* Ships */
+
 #ships {
     display: flex;
     gap: 10px;
@@ -84,6 +86,10 @@ main {
 .ship {
     display: flex;
     border: 1px solid black;
+}
+
+.ship:hover{
+    cursor: pointer;
 }
 
 .ship-block{

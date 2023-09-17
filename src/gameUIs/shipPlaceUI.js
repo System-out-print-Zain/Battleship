@@ -16,6 +16,19 @@ function genGrid() {
   return grid;
 }
 
+function genShip(shipLength){
+  const ship = document.createElement("div");
+  ship.classList.add("ship");
+
+  for (let i = 0; i < shipLength; i++){
+    const shipBlock = document.createElement("div");
+    shipBlock.classList.add("ship-block");
+    ship.appendChild(shipBlock);
+  }
+
+  return ship;
+}
+
 function genShips(){
   const ships = document.createElement("div");
   ships.id = "ships";
@@ -33,17 +46,7 @@ export function displayShipPlaceScreen() {
 
 }
 
-function initShips(){
-
-}
-
-function initGrid(){
-
-}
-
 function initShipPlaceScreen(player){
-  let axis = "x";
-
 
 }
 

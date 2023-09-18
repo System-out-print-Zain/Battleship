@@ -53,19 +53,20 @@ function displayShipPlaceScreen(player) {
 
 const squareInitializer = (() => {
 
-  let axis = "x";
+  let axis = "HOR";
   let lengthOfShipToBePlaced = 0;
+  let shipName;
 
   function getSquares(startInd){
     const squares = [];
-    if (axis === "x"){
+    if (axis === "HOR"){
       const endOfRow = Math.floor(startInd / 10) * 10 + 9;
       for (let i = 0; i < Math.min(lengthOfShipToBePlaced, endOfRow - startInd + 1); i ++){
         const square = document.getElementById(`${startInd + i}`);
         squares.push(square);
       }
     }
-    if (axis === "y"){
+    if (axis === "VERT"){
       for (let i = 0; i < lengthOfShipToBePlaced; i++){
         const square = document.getElementById(`${startInd + 10*i}`);
         if (square !== null){
@@ -78,7 +79,7 @@ const squareInitializer = (() => {
 
   function spaceAvailable(startId){
     const rowNum = Math.floor(startId/10);
-    if (axis === "x"){
+    if (axis === "HOR"){
       return startId + lengthOfShipToBePlaced - 1 < (rowNum + 1) * 10;
     }
     return startId + (lengthOfShipToBePlaced - 1) * 10 < 100;
@@ -98,7 +99,7 @@ const squareInitializer = (() => {
     square.classList.remove("highlight-red");
   }
 
-  function initSquare(squareId){
+  function initSquare(squareId, player){
     const square = document.getElementById(`${squareId}`);
   
     square.addEventListener("mouseover", () => {
@@ -114,14 +115,28 @@ const squareInitializer = (() => {
     })
     square.addEventListener("mouseout", () => {
       const squaresToHighlight = getSquares(squareId);
-      squaresToHighlight.forEach((ele) => {
-        unhighlightSquare(ele);
-      });
+      console.log(player.shipPlaced(shipName), shipName, player.grid);
+      if (!player.shipPlaced(shipName)){
+        squaresToHighlight.forEach((ele) => {
+          unhighlightSquare(ele);
+        });
+      }
+    })
+    square.addEventListener("click", () => {
+      const squaresToHighlight = getSquares(squareId);
+      if (spaceAvailable(squareId)){
+        player.placeShip(shipName, squareId % 10, Math.floor(squareId / 10), axis);
+        squaresToHighlight.forEach((ele) => {
+          highlightSquare(ele, "valid");
+        });
+        lengthOfShipToBePlaced = 0;
+        shipName = null;
+      }
     })
   }
 
   function setAxis(dir){
-    if (dir === "x" || dir === "y"){
+    if (dir === "HOR" || dir === "VERT"){
       axis = dir;
     }
   }
@@ -130,19 +145,24 @@ const squareInitializer = (() => {
     lengthOfShipToBePlaced = length;
   }
 
-  return {initSquare, setAxis, setLengthOfShipToBePlaced};
+  function setShipName(name){
+    shipName = name;
+  }
+
+  return {initSquare, setAxis, setShipName, setLengthOfShipToBePlaced};
 })();
 
 const gridInitializer = (() => {
-  function initGrid(){
+  function initGrid(player){
     for (let shipId = 0; shipId < 100; shipId++){
-      squareInitializer.initSquare(shipId);
+      squareInitializer.initSquare(shipId, player);
     }
   }
 
-  function updateGridSetting(lengthOfShipToBePlaced, axis){
+  function updateGridSetting(selectedShipName, lengthOfShipToBePlaced, axis){
     squareInitializer.setAxis(axis);
     squareInitializer.setLengthOfShipToBePlaced(lengthOfShipToBePlaced);
+    squareInitializer.setShipName(selectedShipName);
   }
 
   return {initGrid, updateGridSetting};
@@ -154,7 +174,6 @@ const shipInitializer = (() => {
   }
   
   function initShips(){
-    gridInitializer.initGrid();
     let selectedShip;
   
     const ships = document.querySelectorAll(".ship");
@@ -166,7 +185,7 @@ const shipInitializer = (() => {
         selectedShip = ship;
   
         selectedShip.classList.add("selected");
-        gridInitializer.updateGridSetting(getShipLength(ship), "x");
+        gridInitializer.updateGridSetting(selectedShip.classList[1], getShipLength(ship), "HOR");
       })
     })
   }
@@ -174,12 +193,12 @@ const shipInitializer = (() => {
   return {initShips};
 })();
 
-function initShipPlaceScreen(){
-  gridInitializer.initGrid();
+function initShipPlaceScreen(player){
+  gridInitializer.initGrid(player);
   shipInitializer.initShips();
 }
 
 export default function loadShipPlaceScreen(player){
   displayShipPlaceScreen(player);
-  initShipPlaceScreen();
+  initShipPlaceScreen(player);
 }

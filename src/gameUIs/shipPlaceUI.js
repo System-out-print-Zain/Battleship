@@ -26,7 +26,7 @@ function genShip(shipLength, shipName){
     ship.appendChild(shipBlock);
   }
 
-  ship.classList.add(shipName);
+  ship.id = shipName;
   return ship;
 }
 
@@ -55,7 +55,7 @@ const squareInitializer = (() => {
 
   let axis = "HOR";
   let lengthOfShipToBePlaced = 0;
-  let shipName;
+  let shipId;
 
   function getSquares(startInd){
     const squares = [];
@@ -115,8 +115,7 @@ const squareInitializer = (() => {
     })
     square.addEventListener("mouseout", () => {
       const squaresToHighlight = getSquares(squareId);
-      console.log(player.shipPlaced(shipName), shipName, player.grid);
-      if (!player.shipPlaced(shipName)){
+      if (!player.shipPlaced(shipId)){
         squaresToHighlight.forEach((ele) => {
           unhighlightSquare(ele);
         });
@@ -125,12 +124,12 @@ const squareInitializer = (() => {
     square.addEventListener("click", () => {
       const squaresToHighlight = getSquares(squareId);
       if (spaceAvailable(squareId)){
-        player.placeShip(shipName, squareId % 10, Math.floor(squareId / 10), axis);
+        player.placeShip(shipId, squareId % 10, Math.floor(squareId / 10), axis);
         squaresToHighlight.forEach((ele) => {
           highlightSquare(ele, "valid");
         });
         lengthOfShipToBePlaced = 0;
-        shipName = null;
+        shipId = null;
       }
     })
   }
@@ -145,11 +144,11 @@ const squareInitializer = (() => {
     lengthOfShipToBePlaced = length;
   }
 
-  function setShipName(name){
-    shipName = name;
+  function setShipId(id){
+    shipId = id;
   }
 
-  return {initSquare, setAxis, setShipName, setLengthOfShipToBePlaced};
+  return {initSquare, setAxis, setShipId, setLengthOfShipToBePlaced};
 })();
 
 const gridInitializer = (() => {
@@ -159,10 +158,10 @@ const gridInitializer = (() => {
     }
   }
 
-  function updateGridSetting(selectedShipName, lengthOfShipToBePlaced, axis){
+  function updateGridSetting(selectedShipId, lengthOfShipToBePlaced, axis){
     squareInitializer.setAxis(axis);
     squareInitializer.setLengthOfShipToBePlaced(lengthOfShipToBePlaced);
-    squareInitializer.setShipName(selectedShipName);
+    squareInitializer.setShipName(selectedShipId);
   }
 
   return {initGrid, updateGridSetting};
@@ -185,7 +184,7 @@ const shipInitializer = (() => {
         selectedShip = ship;
   
         selectedShip.classList.add("selected");
-        gridInitializer.updateGridSetting(selectedShip.classList[1], getShipLength(ship), "HOR");
+        gridInitializer.updateGridSetting(selectedShip.id, getShipLength(ship), "HOR");
       })
     })
   }

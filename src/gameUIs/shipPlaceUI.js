@@ -1,6 +1,5 @@
 const shipPlacementDisplayer = (() => {
   const fleet = []
-  const container = document.querySelector("main");
 
   function genGrid() {
     const grid = document.createElement("div");
@@ -70,7 +69,7 @@ const shipPlacementDisplayer = (() => {
   
     const ships = genShips(player);
     fleet.length = 0;
-    fleet.push(...ships);
+    fleet.push(...ships.children);
     content.appendChild(ships);
   }
 
@@ -148,13 +147,16 @@ const squareInitializer = (() => {
       }
     })
     square.addEventListener("click", () => {
+      if (shipId === null){
+        return;
+      }
       const squaresToHighlight = getSquares(squareId);
       if (spaceAvailable(squareId)){
         player.placeShip(shipId, squareId % 10, Math.floor(squareId / 10), axis);
         squaresToHighlight.forEach((ele) => {
           highlightSquare(ele, "valid");
         });
-        shipPlacementDisplayer.
+        shipPlacementDisplayer.removeShip(shipId);
         lengthOfShipToBePlaced = 0;
         shipId = null;
       }

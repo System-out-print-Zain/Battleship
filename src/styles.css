@@ -102,3 +102,11 @@ main {
 .selected{
     box-shadow: 2px 2px 2px 2px gold;
 }
+
+.highlight-green{
+    background-color: green;
+}
+
+.highlight-red{
+    background-color: red;
+}

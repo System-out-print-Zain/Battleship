@@ -33,8 +33,12 @@ export default class Player {
         return destroyed;
     }
 
+    shipPlaced(shipName){
+        return this.grid.shipPlaced(this.fleet[shipName]);
+    }
+
     placeShip(shipName, startCellX, startCellY){
-        if (this.grid.shipPlaced(this.fleet[shipName])){
+        if (!this.shipPlaced(this.fleet[shipName])){
             this.grid.placeShip(this.fleet[shipName], startCellX, startCellY);
         }else{
             throw Error(`The ${shipName} has already been placed`);
@@ -59,10 +63,6 @@ export class HumanPlayer extends Player {
     static chooseAttack(grid){
         // TODO: Command displayController to get input from user.
     }
-
-    placeFleet(){
-
-    }
 }
 
 export class CPUPlayer extends Player {
@@ -75,9 +75,5 @@ export class CPUPlayer extends Player {
         const randIndex = Math.floor(choices.length * Math.random())
 
         return choices[randIndex];
-    }
-
-    placeFleet(){
-
     }
 }

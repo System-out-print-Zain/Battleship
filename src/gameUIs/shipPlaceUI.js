@@ -16,7 +16,7 @@ function genGrid() {
   return grid;
 }
 
-function genShip(shipLength){
+function genShip(shipLength, shipName){
   const ship = document.createElement("div");
   ship.classList.add("ship");
 
@@ -26,6 +26,7 @@ function genShip(shipLength){
     ship.appendChild(shipBlock);
   }
 
+  ship.classList.add(shipName);
   return ship;
 }
 
@@ -35,7 +36,7 @@ function genShips(player){
 
   const playerShips = player.getShips();
   playerShips.forEach(ship => {
-    DOMShips.appendChild(genShip(ship.length));
+    DOMShips.appendChild(genShip(ship.length, ship.name));
   });
 
   return DOMShips;
@@ -112,8 +113,8 @@ const squareInitializer = (() => {
       });
     })
     square.addEventListener("mouseout", () => {
-      const squaresToUnHighlight = getSquares(squareId);
-      squaresToUnHighlight.forEach((ele) => {
+      const squaresToHighlight = getSquares(squareId);
+      squaresToHighlight.forEach((ele) => {
         unhighlightSquare(ele);
       });
     })
@@ -165,7 +166,7 @@ const shipInitializer = (() => {
         selectedShip = ship;
   
         selectedShip.classList.add("selected");
-        gridInitializer.updateGridSetting(getShipLength(ship), "y");
+        gridInitializer.updateGridSetting(getShipLength(ship), "x");
       })
     })
   }

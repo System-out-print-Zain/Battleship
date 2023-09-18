@@ -1,55 +1,81 @@
-function genGrid() {
-  const grid = document.createElement("div");
-  grid.id = "grid";
+const shipPlacementDisplayer = (() => {
+  const fleet = []
+  const container = document.querySelector("main");
 
-  for (let i = 0; i < 10; i++)
-  {
-    for (let j = 0; j < 10; j++)
+  function genGrid() {
+    const grid = document.createElement("div");
+    grid.id = "grid";
+  
+    for (let i = 0; i < 10; i++)
     {
-        const square = document.createElement("div");
-        square.id = `${i * 10 + j}`;
-        square.classList.add("square");
-        grid.appendChild(square);
+      for (let j = 0; j < 10; j++)
+      {
+          const square = document.createElement("div");
+          square.id = `${i * 10 + j}`;
+          square.classList.add("square");
+          grid.appendChild(square);
+      }
     }
+  
+    return grid;
+  }
+  
+  function genShip(shipLength, shipName){
+    const ship = document.createElement("div");
+    ship.classList.add("ship");
+  
+    for (let i = 0; i < shipLength; i++){
+      const shipBlock = document.createElement("div");
+      shipBlock.classList.add("ship-block");
+      ship.appendChild(shipBlock);
+    }
+  
+    ship.id = shipName;
+    return ship;
+  }
+  
+  function removeShip(shipId){
+    const shipToRemove = document.getElementById(shipId);
+    shipToRemove.remove();
   }
 
-  return grid;
-}
-
-function genShip(shipLength, shipName){
-  const ship = document.createElement("div");
-  ship.classList.add("ship");
-
-  for (let i = 0; i < shipLength; i++){
-    const shipBlock = document.createElement("div");
-    shipBlock.classList.add("ship-block");
-    ship.appendChild(shipBlock);
+  function addShip(shipId){
+    let shipToAdd;
+    for (let i = 0; i < fleet.length; i++){
+      if (fleet[i].id === shipId){
+        shipToAdd = fleet[i]
+      }
+    }
+    const DOMShips = document.getElementById("ships");
+    DOMShips.appendChild(shipToAdd);
+    
+  }
+  
+  function genShips(player){
+    const DOMShips = document.createElement("div");
+    DOMShips.id = "ships";
+  
+    const playerShips = player.getShips();
+    playerShips.forEach(ship => {
+      DOMShips.appendChild(genShip(ship.length, ship.name));
+    });
+  
+    return DOMShips;
   }
 
-  ship.id = shipName;
-  return ship;
-}
+  function display(player){
+    const content = document.querySelector("main");
+    const grid = genGrid();
+    content.appendChild(grid);
+  
+    const ships = genShips(player);
+    fleet.length = 0;
+    fleet.push(...ships);
+    content.appendChild(ships);
+  }
 
-function genShips(player){
-  const DOMShips = document.createElement("div");
-  DOMShips.id = "ships";
-
-  const playerShips = player.getShips();
-  playerShips.forEach(ship => {
-    DOMShips.appendChild(genShip(ship.length, ship.name));
-  });
-
-  return DOMShips;
-}
-
-function displayShipPlaceScreen(player) {
-  const content = document.querySelector("main");
-  const grid = genGrid();
-  content.appendChild(grid);
-
-  const ships = genShips(player);
-  content.appendChild(ships);
-}
+  return {display, removeShip, addShip};
+})();
 
 const squareInitializer = (() => {
 
@@ -128,6 +154,7 @@ const squareInitializer = (() => {
         squaresToHighlight.forEach((ele) => {
           highlightSquare(ele, "valid");
         });
+        shipPlacementDisplayer.
         lengthOfShipToBePlaced = 0;
         shipId = null;
       }
@@ -161,7 +188,7 @@ const gridInitializer = (() => {
   function updateGridSetting(selectedShipId, lengthOfShipToBePlaced, axis){
     squareInitializer.setAxis(axis);
     squareInitializer.setLengthOfShipToBePlaced(lengthOfShipToBePlaced);
-    squareInitializer.setShipName(selectedShipId);
+    squareInitializer.setShipId(selectedShipId);
   }
 
   return {initGrid, updateGridSetting};
@@ -198,6 +225,6 @@ function initShipPlaceScreen(player){
 }
 
 export default function loadShipPlaceScreen(player){
-  displayShipPlaceScreen(player);
+  shipPlacementDisplayer.display(player);
   initShipPlaceScreen(player);
 }

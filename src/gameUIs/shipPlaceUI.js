@@ -173,7 +173,7 @@ const shipInitializer = (() => {
   return {initShips};
 })();
 
-function initShipPlaceScreen(player){
+function initShipPlaceScreen(){
   gridInitializer.initGrid();
   shipInitializer.initShips();
 }

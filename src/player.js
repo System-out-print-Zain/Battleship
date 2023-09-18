@@ -37,9 +37,9 @@ export default class Player {
         return this.grid.shipPlaced(this.fleet[shipName]);
     }
 
-    placeShip(shipName, startCellX, startCellY){
+    placeShip(shipName, startCellX, startCellY, direction){
         if (!this.shipPlaced(this.fleet[shipName])){
-            this.grid.placeShip(this.fleet[shipName], startCellX, startCellY);
+            this.grid.placeShip(this.fleet[shipName], startCellX, startCellY, direction);
         }else{
             throw Error(`The ${shipName} has already been placed`);
         }

@@ -197,25 +197,50 @@ const gridInitializer = (() => {
 })();
 
 const shipInitializer = (() => {
+  let selectedShip;
+
   function getShipLength(DOMShip){
     return DOMShip.children.length;
   }
+
+  function unSelectShip(){
+    if (selectedShip !== undefined){
+      selectedShip.classList.remove("selected");
+    }
+    gridInitializer.updateGridSetting(null, 0, "HOR")
+  }
+
+  function selectShip(DOMShip){
+    selectedShip = DOMShip;
+    selectedShip.classList.add("selected");
+    gridInitializer.updateGridSetting(selectedShip.id, getShipLength(DOMShip), "HOR")
+  }
+
+  function changeSelectShip(DOMShip){
+    unSelectShip();
+    selectShip(DOMShip);
+  }
   
   function initShips(){
-    let selectedShip;
   
     const ships = document.querySelectorAll(".ship");
     ships.forEach((ship) => {
       ship.addEventListener("click", () => {
-        if (selectedShip !== undefined){
-          selectedShip.classList.remove("selected");
-        }
-        selectedShip = ship;
-  
-        selectedShip.classList.add("selected");
-        gridInitializer.updateGridSetting(selectedShip.id, getShipLength(ship), "HOR");
+        changeSelectShip(ship);
       })
     })
+    document.addEventListener("click", (e) => {
+      const grid = document.getElementById("grid");
+      for (let i = 0; i < ships.length; i++){
+        if (e.target === ships[i] || ships[i].contains(e.target)){
+          return;
+        }
+      }
+      if (e.target === grid || grid.contains(e.target)){
+        return;
+      }
+      unSelectShip();
+    });
   }
 
   return {initShips};

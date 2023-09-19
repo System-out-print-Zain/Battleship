@@ -63,15 +63,19 @@ export class HumanPlayer extends Player {
     constructor(name){
         super().constructor(name);
     }
-
-    static chooseAttack(grid){
-        // TODO: Command displayController to get input from user.
-    }
 }
 
 export class CPUPlayer extends Player {
     constructor(name){
         super().constructor(name);
+    }
+
+    placeFleet(){
+        this.placeShip("Carrier", 0, 0, "HOR");
+        this.placeShip("Battleship", 9, 0, "VERT");
+        this.placeShip("Cruiser", 2, 9, "HOR");
+        this.placeShip("Submarine", 0, 5, "VERT");
+        this.placeShip("Destroyer", 8, 9, "HOR");
     }
 
     static chooseAttack(grid){

@@ -4,18 +4,24 @@ import Grid from "./grid";
 const gameController = {
     player1: null,
     player2: null,
-    grid1: null,
-    grid2: null,
 
     setupGame(player1, name1, player2, name2){
         this.player1 = player1 === "usr" ? new HumanPlayer(name1) : new CPUPlayer(name1);
         this.player2 = player2 === "usr" ? new HumanPlayer(name2) : new CPUPlayer(name2);
 
-        this.grid1 = new Grid();
-        this.grid2 = new Grid();
+        if (this.player1 instanceof HumanPlayer){
+            // Command displayController to load the ship place screen
+        }
+        else{
+            this.player1.placeFleet();
+        }
 
-        this.player1.placeFleet(this.grid1);
-        this.player2.placeFleet(this.grid2);
+        if (this.player2 instanceof HumanPlayer){
+            // Command displayController to load the ship place screen
+        }
+        else{
+            this.player2.placeFleet();
+        }
     },
 
     playGame(){

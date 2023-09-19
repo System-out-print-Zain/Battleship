@@ -32,6 +32,14 @@ const shipPlacementDisplayer = (() => {
     ship.id = shipName;
     return ship;
   }
+
+  function genButton(){
+    const button = document.createElement("button");
+    button.id = "toggle-axis";
+    button.textContent = "X ➞";
+
+    return button;
+  }
   
   function removeShip(shipId){
     const shipToRemove = document.getElementById(shipId);
@@ -64,13 +72,21 @@ const shipPlacementDisplayer = (() => {
 
   function display(player){
     const content = document.querySelector("main");
+
+    const axisBtn = genButton();
+    content.appendChild(axisBtn);
+
+    const shipPlaceSection = document.createElement("div");
+    shipPlaceSection.id = "ship-place-section";
     const grid = genGrid();
-    content.appendChild(grid);
+    shipPlaceSection.appendChild(grid);
   
     const ships = genShips(player);
     fleet.length = 0;
     fleet.push(...ships.children);
-    content.appendChild(ships);
+    shipPlaceSection.appendChild(ships);
+
+    content.appendChild(shipPlaceSection);
   }
 
   return {display, removeShip, addShip};

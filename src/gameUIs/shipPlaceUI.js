@@ -98,19 +98,22 @@ const squareInitializer = (() => {
   let lengthOfShipToBePlaced = 0;
   let shipId;
 
-  function getSquares(startInd){
+  function getSquares(startInd, player){
     const squares = [];
     if (axis === "HOR"){
-      const endOfRow = Math.floor(startInd / 10) * 10 + 9;
-      for (let i = 0; i < Math.min(lengthOfShipToBePlaced, endOfRow - startInd + 1); i ++){
-        const square = document.getElementById(`${startInd + i}`);
-        squares.push(square);
+      const endOfRow = Math.floor((startInd / 10)) * 10 + 9;
+      for (let i = 0; i < Math.min(lengthOfShipToBePlaced, endOfRow - startInd + 1); i++){
+        if (player.gridCellEmpty((startInd + i) % 10, Math.floor((startInd + i) / 10))){
+          const square = document.getElementById(`${startInd + i}`);
+          squares.push(square);
+        }
       }
     }
     if (axis === "VERT"){
-      for (let i = 0; i < lengthOfShipToBePlaced; i++){
-        const square = document.getElementById(`${startInd + 10*i}`);
-        if (square !== null){
+      const currRow  = Math.floor(startInd / 10);
+      for (let i = 0; i < Math.min(lengthOfShipToBePlaced, 10 - currRow); i++){
+        if (player.gridCellEmpty((startInd + 10*i) % 10, Math.floor((startInd + 10*i) / 10))){
+          const square = document.getElementById(`${startInd + 10*i}`);
           squares.push(square);
         }
       }
@@ -118,12 +121,9 @@ const squareInitializer = (() => {
     return squares;
   }
 
-  function spaceAvailable(startId){
-    const rowNum = Math.floor(startId/10);
-    if (axis === "HOR"){
-      return startId + lengthOfShipToBePlaced - 1 < (rowNum + 1) * 10;
-    }
-    return startId + (lengthOfShipToBePlaced - 1) * 10 < 100;
+  function spaceAvailable(startId, player){
+    const squaresThatCanBePlaced = getSquares(startId, player);
+    return squaresThatCanBePlaced.length === lengthOfShipToBePlaced;
   }
 
   function highlightSquare(square, validity){
@@ -144,9 +144,9 @@ const squareInitializer = (() => {
     const square = document.getElementById(`${squareId}`);
   
     square.addEventListener("mouseover", () => {
-      const squaresToHighlight = getSquares(squareId);
+      const squaresToHighlight = getSquares(squareId, player);
       squaresToHighlight.forEach((ele) => {
-        if (spaceAvailable(squareId)){
+        if (spaceAvailable(squareId, player)){
           highlightSquare(ele, "valid");
         }
         else{
@@ -155,7 +155,7 @@ const squareInitializer = (() => {
       });
     })
     square.addEventListener("mouseout", () => {
-      const squaresToHighlight = getSquares(squareId);
+      const squaresToHighlight = getSquares(squareId, player);
       if (!player.shipPlaced(shipId)){
         squaresToHighlight.forEach((ele) => {
           unhighlightSquare(ele);
@@ -166,8 +166,8 @@ const squareInitializer = (() => {
       if (shipId === null){
         return;
       }
-      const squaresToHighlight = getSquares(squareId);
-      if (spaceAvailable(squareId)){
+      const squaresToHighlight = getSquares(squareId, player);
+      if (spaceAvailable(squareId, player)){
         player.placeShip(shipId, squareId % 10, Math.floor(squareId / 10), axis);
         squaresToHighlight.forEach((ele) => {
           highlightSquare(ele, "valid");

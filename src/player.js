@@ -33,6 +33,10 @@ export default class Player {
         return destroyed;
     }
 
+    gridCellEmpty(cellX, cellY){
+        return this.grid.cellEmpty(cellX, cellY);
+    }
+
     shipPlaced(shipName){
         return this.grid.shipPlaced(this.fleet[shipName]);
     }

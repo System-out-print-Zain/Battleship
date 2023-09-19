@@ -274,23 +274,29 @@ const shipInitializer = (() => {
   return {initShips};
 })();
 
-function initAxisBtn(){
-  const btn = document.getElementById("toggle-axis");
-  btn.addEventListener("click", () => {
-    const newAxis = gridInitializer.getAxis() === "VERT" ? "HOR" : "VERT";
-    const newText = newAxis === "HOR" ? "X ➞" : "Y ↓";
-    gridInitializer.updateAxis(newAxis);
-    btn.textContent = newText;
-  });
-}
+const axisBtnInitializer = (() => {
+  function initAxisBtn(){
+    const btn = document.getElementById("toggle-axis");
+    btn.addEventListener("click", () => {
+      const newAxis = gridInitializer.getAxis() === "VERT" ? "HOR" : "VERT";
+      const newText = newAxis === "HOR" ? "X ➞" : "Y ↓";
+      gridInitializer.updateAxis(newAxis);
+      btn.textContent = newText;
+    });
+  }
+  return {initAxisBtn};
+})();
 
-function initShipPlaceScreen(player){
-  gridInitializer.initGrid(player);
-  shipInitializer.initShips();
-  initAxisBtn();
-}
+const shipPlacementInitializer = (() => {
+  function initShipPlaceScreen(player){
+    gridInitializer.initGrid(player);
+    shipInitializer.initShips();
+    axisBtnInitializer.initAxisBtn();
+  }
+  return {initShipPlaceScreen};
+})();
 
 export default function loadShipPlaceScreen(player){
   shipPlacementDisplayer.display(player);
-  initShipPlaceScreen(player);
+  shipPlacementInitializer.initShipPlaceScreen(player);
 }

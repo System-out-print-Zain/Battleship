@@ -193,7 +193,11 @@ const squareInitializer = (() => {
     shipId = id;
   }
 
-  return {initSquare, setAxis, setShipId, setLengthOfShipToBePlaced};
+  function getAxis(){
+    return axis;
+  }
+
+  return {initSquare, setAxis, setShipId, setLengthOfShipToBePlaced, getAxis};
 })();
 
 const gridInitializer = (() => {
@@ -203,33 +207,41 @@ const gridInitializer = (() => {
     }
   }
 
-  function updateGridSetting(selectedShipId, lengthOfShipToBePlaced, axis){
-    squareInitializer.setAxis(axis);
-    squareInitializer.setLengthOfShipToBePlaced(lengthOfShipToBePlaced);
-    squareInitializer.setShipId(selectedShipId);
+  function getShipLength(id){
+    const ship = document.getElementById(id);
+    return ship === null ? 0 : ship.children.length;
   }
 
-  return {initGrid, updateGridSetting};
+  function updateSelectedShip(newId){
+    squareInitializer.setShipId(newId);
+    squareInitializer.setLengthOfShipToBePlaced(getShipLength(newId));
+  }
+
+  function updateAxis(axis){
+    squareInitializer.setAxis(axis);
+  }
+
+  function getAxis(){
+    return squareInitializer.getAxis();
+  }
+
+  return {initGrid, updateAxis, updateSelectedShip, getAxis};
 })();
 
 const shipInitializer = (() => {
   let selectedShip;
 
-  function getShipLength(DOMShip){
-    return DOMShip.children.length;
-  }
-
   function unSelectShip(){
     if (selectedShip !== undefined){
       selectedShip.classList.remove("selected");
     }
-    gridInitializer.updateGridSetting(null, 0, "HOR")
+    gridInitializer.updateSelectedShip(null);
   }
 
   function selectShip(DOMShip){
     selectedShip = DOMShip;
     selectedShip.classList.add("selected");
-    gridInitializer.updateGridSetting(selectedShip.id, getShipLength(DOMShip), "HOR")
+    gridInitializer.updateSelectedShip(selectedShip.id);
   }
 
   function changeSelectShip(DOMShip){
@@ -262,9 +274,20 @@ const shipInitializer = (() => {
   return {initShips};
 })();
 
+function initAxisBtn(){
+  const btn = document.getElementById("toggle-axis");
+  btn.addEventListener("click", () => {
+    const newAxis = gridInitializer.getAxis() === "VERT" ? "HOR" : "VERT";
+    const newText = newAxis === "HOR" ? "X ➞" : "Y ↑";
+    gridInitializer.updateAxis(newAxis);
+    btn.textContent = newText;
+  });
+}
+
 function initShipPlaceScreen(player){
   gridInitializer.initGrid(player);
   shipInitializer.initShips();
+  initAxisBtn();
 }
 
 export default function loadShipPlaceScreen(player){

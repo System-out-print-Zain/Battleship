@@ -278,7 +278,7 @@ function initAxisBtn(){
   const btn = document.getElementById("toggle-axis");
   btn.addEventListener("click", () => {
     const newAxis = gridInitializer.getAxis() === "VERT" ? "HOR" : "VERT";
-    const newText = newAxis === "HOR" ? "X ➞" : "Y ↑";
+    const newText = newAxis === "HOR" ? "X ➞" : "Y ↓";
     gridInitializer.updateAxis(newAxis);
     btn.textContent = newText;
   });

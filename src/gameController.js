@@ -1,5 +1,5 @@
 import { HumanPlayer, CPUPlayer } from "./player";
-import Grid from "./grid";
+import displayController from "./displayController";
 
 const gameController = {
     player1: null,
@@ -10,14 +10,14 @@ const gameController = {
         this.player2 = player2 === "usr" ? new HumanPlayer(name2) : new CPUPlayer(name2);
 
         if (this.player1 instanceof HumanPlayer){
-            // Command displayController to load the ship place screen
+            displayController.loadShipPlaceScreen(this.player1);
         }
         else{
             this.player1.placeFleet();
         }
 
         if (this.player2 instanceof HumanPlayer){
-            // Command displayController to load the ship place screen
+            displayController.loadShipPlaceScreen(this.player2);
         }
         else{
             this.player2.placeFleet();

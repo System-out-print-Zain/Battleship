@@ -296,7 +296,12 @@ const shipPlacementInitializer = (() => {
   return {initShipPlaceScreen};
 })();
 
-export default function loadShipPlaceScreen(player){
-  shipPlacementDisplayer.display(player);
-  shipPlacementInitializer.initShipPlaceScreen(player);
-}
+const shipPlaceScreenLoader = (() => {
+  function load(player){
+    shipPlacementDisplayer.display(player);
+    shipPlacementInitializer.initShipPlaceScreen(player);
+  }
+  return {load};
+})();
+
+export default shipPlaceScreenLoader;

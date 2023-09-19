@@ -1,2 +1,6 @@
+const endScreenLoader = (() => {
+    function load(){}
+    return {load}
+})();
 
-export default function displayEndScreen() {}
+export default endScreenLoader;

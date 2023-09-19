@@ -1,2 +1,7 @@
 
-export default function displayBattleScreen() {}
+const battleScreenLoader = (() => {
+    function load(){}
+    return {load}
+})();
+
+export default battleScreenLoader;

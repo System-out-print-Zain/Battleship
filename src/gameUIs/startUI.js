@@ -1,2 +1,6 @@
+const startScreenLoader = (() => {
+    function load(){}
+    return {load}
+})();
 
-export default function displayStartScreen() {}
+export default startScreenLoader;

@@ -4,8 +4,8 @@ import startScreenLoader from "./gameUIs/startUI";
 import endScreenLoader from "./gameUIs/endUI";
 
 const displayController = (() => {
-    function loadShipPlaceScreen(){
-        shipPlaceScreenLoader.load();
+    function loadShipPlaceScreen(player){
+        shipPlaceScreenLoader.load(player);
     }
     function loadBattleScreen(){
         battleScreenLoader.load();

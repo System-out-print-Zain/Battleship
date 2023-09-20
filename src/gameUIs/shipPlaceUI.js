@@ -40,10 +40,42 @@ const shipPlacementDisplayer = (() => {
 
     return button;
   }
+
+  function genDoneButton(){
+    const button = document.createElement("button");
+    button.id = "done";
+    button.classList.add("hidden");
+    button.textContent = "✓";
+
+    return button;
+  }
+
+  function showDoneButton(){
+    const button = document.getElementById("done");
+    button.classList.remove("hidden");
+  }
+
+  function hideDoneButton(){
+    const button = document.getElementById("done");
+    button.classList.add("hidden");
+  }
+
+  function allShipsRemoved(){
+    let allRemoved = true;
+    for (let i = 0; i < fleet.length; i++){
+      if (document.body.contains(fleet[i])){
+        allRemoved = false;
+      }
+    }
+    return allRemoved;
+  }
   
   function removeShip(shipId){
     const shipToRemove = document.getElementById(shipId);
     shipToRemove.remove();
+    if (allShipsRemoved()){
+      showDoneButton();
+    }
   }
 
   function addShip(shipId){
@@ -87,6 +119,9 @@ const shipPlacementDisplayer = (() => {
     shipPlaceSection.appendChild(ships);
 
     content.appendChild(shipPlaceSection);
+
+    const doneBtn = genDoneButton();
+    content.appendChild(doneBtn);
   }
 
   return {display, removeShip, addShip};

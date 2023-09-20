@@ -286,13 +286,9 @@ const shipInitializer = (() => {
   }
   
   function initShips(){
-  
+
     const ships = document.querySelectorAll(".ship");
-    ships.forEach((ship) => {
-      ship.addEventListener("click", () => {
-        changeSelectShip(ship);
-      })
-    })
+    
     document.addEventListener("click", (e) => {
       const grid = document.getElementById("grid");
       for (let i = 0; i < ships.length; i++){
@@ -305,6 +301,12 @@ const shipInitializer = (() => {
       }
       unSelectShip();
     });
+
+    ships.forEach((ship) => {
+      ship.addEventListener("click", () => {
+        changeSelectShip(ship);
+      })
+    })
   }
 
   return {initShips};

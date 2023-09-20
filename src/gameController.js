@@ -39,6 +39,6 @@ const gameController = {
 
         // TODO: Command displayController to show the end screen with the result
     },
-}
+};
 
 export default gameController;

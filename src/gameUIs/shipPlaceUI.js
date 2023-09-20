@@ -33,7 +33,7 @@ const shipPlacementDisplayer = (() => {
     return ship;
   }
 
-  function genButton(){
+  function genAxisButton(){
     const button = document.createElement("button");
     button.id = "toggle-axis";
     button.textContent = "X ➞";
@@ -73,7 +73,7 @@ const shipPlacementDisplayer = (() => {
   function display(player){
     const content = document.querySelector("main");
 
-    const axisBtn = genButton();
+    const axisBtn = genAxisButton();
     content.appendChild(axisBtn);
 
     const shipPlaceSection = document.createElement("div");

@@ -1,7 +1,7 @@
 import Ship from "./ship";
 import Grid from "./grid";
 
-export default class Player {
+export class Player {
     static #genFleet(){
         return {
             "Carrier": new Ship("Carrier", 5),
@@ -59,16 +59,7 @@ export default class Player {
     }
 }
 
-export class HumanPlayer extends Player {
-    constructor(name){
-        super().constructor(name);
-    }
-}
-
 export class CPUPlayer extends Player {
-    constructor(name){
-        super().constructor(name);
-    }
 
     placeFleet(){
         this.placeShip("Carrier", 0, 0, "HOR");

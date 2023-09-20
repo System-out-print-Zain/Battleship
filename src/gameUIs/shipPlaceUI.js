@@ -322,19 +322,32 @@ const axisBtnInitializer = (() => {
   return {initAxisBtn};
 })();
 
+const doneBtnInitializer = (() => {
+  async function initDoneBtn(){
+    const btn = document.getElementById("done");
+    return new Promise(resolve => {
+      btn.addEventListener("click", () => {
+        resolve();
+      })
+    }) 
+  }
+  return {initDoneBtn};
+})();
+
 const shipPlacementInitializer = (() => {
-  function initShipPlaceScreen(player){
+  async function initShipPlaceScreen(player){
     gridInitializer.initGrid(player);
     shipInitializer.initShips();
     axisBtnInitializer.initAxisBtn();
+    await doneBtnInitializer.initDoneBtn();
   }
   return {initShipPlaceScreen};
 })();
 
 const shipPlaceScreenLoader = (() => {
-  function load(player){
+  async function load(player){
     shipPlacementDisplayer.display(player);
-    shipPlacementInitializer.initShipPlaceScreen(player);
+    await shipPlacementInitializer.initShipPlaceScreen(player);
   }
   return {load};
 })();

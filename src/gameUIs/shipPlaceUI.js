@@ -103,6 +103,7 @@ const shipPlacementDisplayer = (() => {
   }
 
   function display(player){
+    document.body.replaceWith(document.body.cloneNode(true));
     const content = document.querySelector("main");
     content.innerHTML = "";
 
@@ -288,8 +289,8 @@ const shipInitializer = (() => {
   function initShips(){
 
     const ships = document.querySelectorAll(".ship");
-    
-    document.addEventListener("click", (e) => {
+
+    document.body.addEventListener("click", (e) => {
       const grid = document.getElementById("grid");
       for (let i = 0; i < ships.length; i++){
         if (e.target === ships[i] || ships[i].contains(e.target)){

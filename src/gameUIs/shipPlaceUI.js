@@ -104,6 +104,7 @@ const shipPlacementDisplayer = (() => {
 
   function display(player){
     const content = document.querySelector("main");
+    content.innerHTML = "";
 
     const axisBtn = genAxisButton();
     content.appendChild(axisBtn);

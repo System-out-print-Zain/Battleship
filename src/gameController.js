@@ -9,18 +9,18 @@ const gameController = {
         this.player1 = player1 === "usr" ? new Player(name1) : new CPUPlayer(name1);
         this.player2 = player2 === "usr" ? new Player(name2) : new CPUPlayer(name2);
 
-        if (this.player1 instanceof Player){
-            await displayController.loadShipPlaceScreen(this.player1);
-        }
-        else{
+        if (this.player1 instanceof CPUPlayer){
             this.player1.placeFleet();
         }
+        else{
+            await displayController.loadShipPlaceScreen(this.player1);
+        }
 
-        if (this.player2 instanceof Player){
-            await displayController.loadShipPlaceScreen(this.player2);
+        if (this.player2 instanceof CPUPlayer){
+            this.player2.placeFleet();
         }
         else{
-            this.player2.placeFleet();
+            await displayController.loadShipPlaceScreen(this.player2);
         }
     },
 

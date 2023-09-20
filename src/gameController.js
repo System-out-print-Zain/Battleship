@@ -1,4 +1,4 @@
-import { HumanPlayer, CPUPlayer } from "./player";
+import { Player, CPUPlayer } from "./player";
 import displayController from "./displayController";
 
 const gameController = {
@@ -6,17 +6,17 @@ const gameController = {
     player2: null,
 
     async setupGame(player1, name1, player2, name2){
-        this.player1 = player1 === "usr" ? new HumanPlayer(name1) : new CPUPlayer(name1);
-        this.player2 = player2 === "usr" ? new HumanPlayer(name2) : new CPUPlayer(name2);
+        this.player1 = player1 === "usr" ? new Player(name1) : new CPUPlayer(name1);
+        this.player2 = player2 === "usr" ? new Player(name2) : new CPUPlayer(name2);
 
-        if (this.player1 instanceof HumanPlayer){
+        if (this.player1 instanceof Player){
             await displayController.loadShipPlaceScreen(this.player1);
         }
         else{
             this.player1.placeFleet();
         }
 
-        if (this.player2 instanceof HumanPlayer){
+        if (this.player2 instanceof Player){
             await displayController.loadShipPlaceScreen(this.player2);
         }
         else{

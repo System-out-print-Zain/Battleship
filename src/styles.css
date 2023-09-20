@@ -78,6 +78,21 @@ header {
     cursor: pointer;
 }
 
+#done {
+    cursor: pointer;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    color: green;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
 /* Grid */
 
 #grid {

@@ -55,11 +55,6 @@ const shipPlacementDisplayer = (() => {
     button.classList.remove("hidden");
   }
 
-  function hideDoneButton(){
-    const button = document.getElementById("done");
-    button.classList.add("hidden");
-  }
-
   function allShipsRemoved(){
     let allRemoved = true;
     for (let i = 0; i < fleet.length; i++){

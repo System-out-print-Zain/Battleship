@@ -24,7 +24,30 @@ const gameController = (() => {
         }
     }
 
-    return {setupGame};
+    async function battle(){
+        let attackingPlayer = player1;
+        let attackedPlayer = player2
+        let attack;
+        
+        while (!attackingPlayer.fleetDestroyed()){
+            if (!(attackingPlayer instanceof CPUPlayer)){
+                attack = await displayController.loadBattleScreen(attackingPlayer, attackedPlayer);
+            }
+            else {
+                attack = attackingPlayer.chooseAttack(attackedPlayer.grid);
+            }
+            await displayController.showAttack(attackingPlayer, attack, attackedPlayer);
+            attackingPlayer = attackingPlayer === player1 ? player2 : player1;
+            attackedPlayer = attackedPlayer === player1 ? player2 : player1;
+        }
+    }
+
+    async function playGame(player1Type, name1, player2Type, name2){
+        await setupGame(player1Type, name1, player2Type, name2);
+        await battle();
+    }
+
+    return {playGame};
 })();
 
 export default gameController;

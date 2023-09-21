@@ -1,4 +1,4 @@
-import shipPlaceScreenLoader from "./gameUIs/shipPlaceUI";
+import shipPlaceScreenLoader from "./gameUIs/shipPlacement/shipPlacementLoad";
 import battleScreenLoader from "./gameUIs/battleUI";
 import startScreenLoader from "./gameUIs/startUI";
 import endScreenLoader from "./gameUIs/endUI";
